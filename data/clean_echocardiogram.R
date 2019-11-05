@@ -8,6 +8,7 @@ HeartData <- read.csv( "echocardiogram.csv" )
   %>%select( -c( mult, name, group, alive.at.1 ) )
   %>%filter( !( survival < 12 & still.alive == 1 ) )
   %>%mutate( target = case_when( survival >= 12 & still.alive == 1 ~ 1, TRUE ~ 0 ) )
+  %>%select( -c( survival, still.alive ) )
   ->FinalHeartData
 )
 
