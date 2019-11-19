@@ -1,0 +1,11 @@
+
+# IDEA
+.idea/
+out/
+*.iml
+
+# VSCode
+.vscode/
+
+# Java
+*.class
