@@ -10,6 +10,7 @@ public class Main
 {
     public static void main( String[] args )
     {
-        GUI gui = new GUI();
+        PythonRunner pr = new PythonRunner();
+        GUI gui = new GUI( pr );
     }
 }

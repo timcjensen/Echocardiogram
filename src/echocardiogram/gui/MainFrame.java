@@ -19,14 +19,16 @@ import java.text.NumberFormat;
 
 public class MainFrame extends JFrame implements ActionListener
 {
+    private GUI gui;
     private JPanel mainPanel, bottomPanel, centerPanel, dataPanel, resultPanel;
     private JButton runButton;
     private JFormattedTextField ageField, lvddField, wmsField;
     private MainMenu menu;
     private Dimension windowSize;
 
-    public MainFrame()
+    public MainFrame( GUI gui )
     {
+        this.gui = gui;
         // default window size
         this.windowSize = new Dimension( 800, 600 );
 
@@ -121,6 +123,8 @@ public class MainFrame extends JFrame implements ActionListener
             System.out.println( ageValue );
             System.out.println( lvddValue );
             System.out.println( wmsValue );
+
+            System.out.println( gui.execPython( ageValue, lvddValue, wmsValue ) );
         }
     }
 }
