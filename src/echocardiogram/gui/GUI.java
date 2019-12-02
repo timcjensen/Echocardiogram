@@ -24,7 +24,7 @@ public class GUI
         dtf.setVisible( true );
     }
 
-    public double execPython( double ageValue, double lvddValue, double wmsValue )
+    public int execPython( double ageValue, double lvddValue, double wmsValue )
     {
         try
         {

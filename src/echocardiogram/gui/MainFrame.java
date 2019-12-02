@@ -11,6 +11,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -21,8 +23,10 @@ public class MainFrame extends JFrame implements ActionListener
 {
     private GUI gui;
     private JPanel mainPanel, bottomPanel, centerPanel, dataPanel, resultPanel;
+    private JLabel finalResultLabel;
     private JButton runButton, dataButton;
     private JFormattedTextField ageField, lvddField, wmsField;
+    private Font resultFont;
     private MainMenu menu;
     private Dimension windowSize;
 
@@ -95,8 +99,19 @@ public class MainFrame extends JFrame implements ActionListener
         dataPanel.add( fieldPanel, BorderLayout.LINE_END );
 
         resultPanel = new JPanel();
+        JPanel innerPanel = new JPanel();
+        resultPanel.setLayout( new BorderLayout() );
         JLabel resultLabel = new JLabel( "Results" );
-        resultPanel.add( resultLabel );
+        resultLabel.setLayout( new GridBagLayout() );
+        resultPanel.add( resultLabel, BorderLayout.NORTH );
+        finalResultLabel = new JLabel( "" );
+        resultFont = new Font( "Helvetica", Font.BOLD, 24 );
+        finalResultLabel.setFont( resultFont );
+        finalResultLabel.setForeground( Color.GREEN );
+        finalResultLabel.setBackground( Color.BLACK );
+        finalResultLabel.setOpaque( true );
+        innerPanel.add( finalResultLabel );
+        resultPanel.add( innerPanel );
         resultPanel.setBorder( BorderFactory.createLineBorder( Color.BLACK ) );
 
         bottomPanel = new JPanel();
@@ -128,7 +143,20 @@ public class MainFrame extends JFrame implements ActionListener
             System.out.println( lvddValue );
             System.out.println( wmsValue );
 
-            System.out.println( gui.execPython( ageValue, lvddValue, wmsValue ) );
+            int result = 0;
+
+            if ( ageValue > 0.0 && lvddValue > 0.0 && wmsValue > 0.0 )
+                result = gui.execPython( ageValue, lvddValue, wmsValue );
+
+            if ( result == 1 ) {
+                finalResultLabel.setForeground(Color.GREEN);
+                finalResultLabel.setText("Patient will survive");
+            }
+            else
+            {
+                finalResultLabel.setForeground( Color.RED );
+                finalResultLabel.setText( "Patient will not survive" );
+            }
         }
 
         if ( e.getSource() == dataButton )

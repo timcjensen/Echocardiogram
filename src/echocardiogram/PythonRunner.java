@@ -14,7 +14,7 @@ public class PythonRunner
         cmd = "python mlp_driver.py";
     }
 
-    public Double execute( double ageValue, double lvddValue, double wmsValue ) throws IOException, InterruptedException
+    public int execute( double ageValue, double lvddValue, double wmsValue ) throws IOException, InterruptedException
     {
         String command = cmd + " " + ageValue + " " + lvddValue + " " + wmsValue;
         System.out.println(command);
@@ -26,11 +26,11 @@ public class PythonRunner
             BufferedReader in = new BufferedReader( new InputStreamReader( p.getInputStream() ) );
             String line = in.readLine();
             System.out.println(line);
-            return Double.parseDouble( line );
+            return (int) Double.parseDouble( line );
         } catch( IOException e )
         {
             e.printStackTrace();
         }
-        return 0.0;
+        return 0;
     }
 }
