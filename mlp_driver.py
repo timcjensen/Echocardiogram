@@ -1,8 +1,15 @@
 from sklearn.neural_network import MLPClassifier
 from joblib import load
+import sys
 
 clf = load('mlp.joblib')
 
 def predict(age, lvdd, wms):
 	prob = clf.predict_proba([[age, lvdd, wms]])
-	print(prob[0,1])
+	return prob
+
+age = float(sys.argv[1])
+lvdd = float(sys.argv[2])
+wms = float(sys.argv[3])
+
+print(predict(age, lvdd, wms)[0,0])
