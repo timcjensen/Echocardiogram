@@ -1,6 +1,6 @@
-#Linear Support Vector Classification
+#Nearest Centroid Classification
 
-from sklearn import svm
+from sklearn.neighbors import NearestCentroid
 from sklearn.metrics import confusion_matrix
 import numpy as np
 
@@ -13,16 +13,16 @@ tn1 = 0
 fn1 = 0
 
 for _ in range(10):
-	for _ in range(10):
+	for _ in range(250):
 		np.random.shuffle(echo)
 		train_data = echo[10:]
 		test_data = echo[:10]
 		X = train_data[:,0:7]
 		y = train_data[:,-1]
-		clf = svm.LinearSVC()
-		clf.fit(X, y)
+		neigh = NearestCentroid()
+		neigh.fit(X, y)
 
-		pred_targets = clf.predict(test_data[:,0:7])
+		pred_targets = neigh.predict(test_data[:,0:7])
 		test_targets = test_data[:,-1]
 
 		conf_matrix = confusion_matrix(test_targets, pred_targets, labels=[0,1])
