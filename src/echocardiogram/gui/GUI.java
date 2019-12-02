@@ -18,6 +18,12 @@ public class GUI
         frame.setVisible( true );
     }
 
+    public void showDataTable()
+    {
+        DataTableFrame dtf = new DataTableFrame();
+        dtf.setVisible( true );
+    }
+
     public int execPython( double ageValue, double lvddValue, double wmsValue )
     {
         try

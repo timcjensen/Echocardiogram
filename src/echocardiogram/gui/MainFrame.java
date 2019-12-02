@@ -21,7 +21,7 @@ public class MainFrame extends JFrame implements ActionListener
 {
     private GUI gui;
     private JPanel mainPanel, bottomPanel, centerPanel, dataPanel, resultPanel;
-    private JButton runButton;
+    private JButton runButton, dataButton;
     private JFormattedTextField ageField, lvddField, wmsField;
     private MainMenu menu;
     private Dimension windowSize;
@@ -56,6 +56,9 @@ public class MainFrame extends JFrame implements ActionListener
 
         runButton = new JButton( "Run" );
         runButton.addActionListener( this );
+
+        dataButton = new JButton( "View Data" );
+        dataButton.addActionListener( this );
 
         dataPanel = new JPanel();
         dataPanel.setLayout( new BorderLayout() );
@@ -98,6 +101,7 @@ public class MainFrame extends JFrame implements ActionListener
 
         bottomPanel = new JPanel();
         bottomPanel.add( runButton );
+        bottomPanel.add( dataButton );
 
         centerPanel = new JPanel();
         centerPanel.setLayout( new GridLayout() );
@@ -125,6 +129,11 @@ public class MainFrame extends JFrame implements ActionListener
             System.out.println( wmsValue );
 
             System.out.println( gui.execPython( ageValue, lvddValue, wmsValue ) );
+        }
+
+        if ( e.getSource() == dataButton )
+        {
+            gui.showDataTable();
         }
     }
 }
